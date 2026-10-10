@@ -426,3 +426,69 @@ def bandsplot(
         ebs_plot.export_data(filename)
 
     return ebs_plot.fig, ebs_plot.ax
+
+def bandsplot_all(
+    code: str,
+    dirname: str,
+    fermi: float = None,
+    fermi_shift: float = 0,
+    interpolation_factor: int = 1,
+    interpolation_type: str = "cubic",
+    projection_mask: np.ndarray = None,
+    kticks=None,
+    knames=None,
+    kdirect: bool = True,
+    elimit: List[float] = None,
+    ax: plt.Axes = None,
+    show: bool = True,
+    savefig: str = None,
+    print_plot_opts: bool = False,
+    export_data_file: str = None,
+    export_append_mode: bool = True,
+    ktick_limit: List[float] = None,
+    x_limit: List[float] = None,
+    use_cache: bool = False,
+    quiet_welcome: bool = False,
+    **kwargs,
+):
+    """
+    A new function to plot s, p, d orbitals for all elements automatically.
+    """
+    from pyprocar.io.parser import Parser
+
+    # Read structure to get all elements
+    parser = Parser(code=code, dirpath=dirname)
+    structure = parser.structure
+    elements = np.unique(structure.atoms)
+
+    # Example items format: {'Fe': ['s', 'p', 'd'], 'O': ['s', 'p', 'd']}
+    items = {}
+    for el in elements:
+        items[el] = ['s', 'p', 'd']
+
+    return bandsplot(
+        code=code,
+        dirname=dirname,
+        mode="overlay",
+        items=items,
+        fermi=fermi,
+        fermi_shift=fermi_shift,
+        interpolation_factor=interpolation_factor,
+        interpolation_type=interpolation_type,
+        projection_mask=projection_mask,
+        kticks=kticks,
+        knames=knames,
+        kdirect=kdirect,
+        elimit=elimit,
+        ax=ax,
+        show=show,
+        savefig=savefig,
+        print_plot_opts=print_plot_opts,
+        export_data_file=export_data_file,
+        export_append_mode=export_append_mode,
+        ktick_limit=ktick_limit,
+        x_limit=x_limit,
+        use_cache=use_cache,
+        quiet_welcome=quiet_welcome,
+        **kwargs
+    )

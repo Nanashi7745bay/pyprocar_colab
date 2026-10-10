@@ -1,7 +1,7 @@
 
 
 from .scriptBandsDosplot import bandsdosplot
-from .scriptBandsplot import bandsplot
+from .scriptBandsplot import bandsplot, bandsplot_all
 from .scriptDosplot import dosplot
 from .scriptCat import cat
 
