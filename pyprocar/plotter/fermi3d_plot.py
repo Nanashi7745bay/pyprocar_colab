@@ -11,7 +11,7 @@ from matplotlib import colors as mpcolors
 from PIL import Image
 from pyvista.core.filters import _get_output
 from pyvista.core.utilities import (
-    NORMALS,
+
     assert_empty_kwargs,
     generate_plane,
     get_array,
